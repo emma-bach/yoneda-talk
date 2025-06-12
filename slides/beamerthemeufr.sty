@@ -1,0 +1,57 @@
+\usepackage{tikz}
+
+
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamertemplate{subsection in toc}{\leavevmode\leftskip=3.2em\rlap{\hskip-2em\inserttocsectionnumber.\inserttocsubsectionnumber}\inserttocsubsection\par}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{blocks}[default]
+\setbeamertemplate{enumerate items}[default]
+\setbeamertemplate{itemize items}[default]
+\setbeamertemplate{date}[default]
+
+\setbeamertemplate{blocks}[rounded][shadow=true]
+
+\AtBeginSection[]{
+  \begin{frame}
+  \vfill
+  \centering
+  
+  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title} \textbf{\insertsectionhead}\par%
+  \end{beamercolorbox}
+  \vfill
+  \end{frame}
+}
+
+\setbeamertemplate{footline}{
+    \begin{beamercolorbox}[wd=\paperwidth,sep=5pt]{}%
+        \begin{tikzpicture}[remember picture,overlay]
+            \node[xshift=1mm,yshift=3mm,anchor=west] at (current page.south west){%
+            \includegraphics[width=0.2\textwidth]{logos/ufr-logo-cut.png}};
+        \end{tikzpicture}
+        \hspace{0.2\textwidth}%
+        \parbox[c]{0.6\textwidth}{
+            \centering%
+            \usebeamerfont{footline} \inserttitle
+        }
+        \hspace{0.1\textwidth}%
+        \insertframenumber/\inserttotalframenumber
+    \end{beamercolorbox}%
+}
+
+\defbeamertemplate*{title page}{customized}[1][]
+{
+    \begin{tikzpicture}[remember picture,overlay]
+        \node[xshift=3mm,yshift=-2mm,anchor=north west] at (current page.north west){%
+        \includegraphics[width=0.3\textwidth]{logos/ufr-logo-cut.png}};
+    \end{tikzpicture}
+
+    
+    \usebeamerfont{title}\textbf{\inserttitle}\par
+    \usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par
+    \bigskip
+    \usebeamerfont{author}\insertauthor\par
+    \usebeamerfont{institute}\insertinstitute\par
+    \usebeamerfont{date}\insertdate\par
+}
