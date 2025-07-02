@@ -1,11 +1,19 @@
-% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXHRleHR7SG9tfShBLEEpIl0sWzMsMCwiXFx0ZXh0e0hvbX0oQSxYKSJdLFswLDMsIkYoQSkiXSxbMywzLCJGKFgpIl0sWzAsMSwiXFx0ZXh0e0hvbX0oQSxmKSJdLFsyLDMsIkYoZikiXSxbMSwzLCJcXFBoaV9YIiwxXSxbMCwyLCJcXFBoaV9ZIiwxXV0=
+\documentclass{article}
+\usepackage{tikz-cd}
+\begin{document}
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCIxIl0sWzQsMCwiMiJdLFs0LDQsIjMiXSxbNywyXSxbMCwxLCIxIFxcbGVxIDIiXSxbMSwyLCIyIFxcbGVxIDMiXSxbMCwyLCIxIFxcbGVxIDIgXFxjaXJjIDIgXFxsZXEgMyA6IDEgXFxsZXEgMyIsMl0sWzAsMCwiaWRfMSA6IDEgXFxsZXEgMSJdLFsxLDEsImlkXzIgOiAyIFxcbGVxIDIiXSxbMiwyLCJpZF8zIDogMyBcXGxlcSAzIiwyLHsicmFkaXVzIjotM31dXQ==
 \[\begin{tikzcd}
-	{\text{Hom}(A,A)} &&& {\text{Hom}(A,X)} \\
+	1 &&&& 2 \\
 	\\
+	&&&&&&& {} \\
 	\\
-	{F(A)} &&& {F(X)}
-	\arrow["{\text{Hom}(A,f)}", from=1-1, to=1-4]
-	\arrow["{\Phi_Y}"{description}, from=1-1, to=4-1]
-	\arrow["{\Phi_X}"{description}, from=1-4, to=4-4]
-	\arrow["{F(f)}", from=4-1, to=4-4]
+	&&&& 3
+	\arrow["{id_1 : 1 \leq 1}", from=1-1, to=1-1, loop, in=55, out=125, distance=10mm]
+	\arrow["{f : 1 \leq 2}", from=1-1, to=1-5]
+	\arrow["{f \circ g : 1 \leq 3}"', from=1-1, to=5-5]
+	\arrow["{id_2 : 2 \leq 2}", from=1-5, to=1-5, loop, in=55, out=125, distance=10mm]
+	\arrow["{g : 2 \leq 3}", from=1-5, to=5-5]
+	\arrow["{id_3 : 3 \leq 3}"', from=5-5, to=5-5, loop, in=305, out=235, distance=10mm]
 \end{tikzcd}\]
+\end{document}
+
