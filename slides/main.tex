@@ -33,6 +33,7 @@
 
 \newcommand{\bC}{\mathbb{C}}
 \newcommand{\bD}{\mathbb{D}}
+\newcommand{\bS}{\mathbb{S}}
 
 \title{What you needa know about Yoneda}
 \author{Emma Bach (she/her)}
@@ -57,7 +58,7 @@
   \item A common sentiment in many cultures is the idea that people are defined by how they interact with their surroundings.
   \pause\item ``\textit{Tell me your company, and I will tell you what you are.}''\footnote{Quoted as a proverb in \textit{Don Quixote}}
   \pause\item The Yoneda Lemma is the result of applying this way of thinking to mathematical objects within the extremely general setting of \textit{category theory}.
-  \pause\item Far-reaching consequences throughout abstract algebra, set theory, and functional programming.
+  \pause\item As a result, a category $\bC$ is often best understood by instead studying functors from that category into $\mathbb{S}et$.
  \end{itemize}
 \end{frame}
 
@@ -87,6 +88,7 @@ A \textit{category} $\bC$ consists of:
 If $\bC(A, B)$ is a set, we call it the \textit{homset} from $A$ to $B$.
 \end{columns}
 \end{frame}
+\iffalse
 \begin{frame}[fragile]{Examples}
 \begin{columns}
 \column{0.3\textwidth}
@@ -154,7 +156,8 @@ Order Categories
 %
 %
 %
-\begin{frame}[fragile]{Functors in Category Theory}
+
+\begin{frame}[fragile]{Functors}
 \begin{columns}
 \column{0.3\textwidth}
 % https://q.uiver.app/#q=WzAsNCxbMCwwLCJBIl0sWzAsMiwiRihBKSJdLFsyLDAsIkIiXSxbMiwyLCJGKEIpIl0sWzAsMSwiRiIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFswLDIsImYiLDJdLFsyLDMsIkYiLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMSwzLCJGKGYpIl1d
@@ -181,7 +184,6 @@ Order Categories
 \end{itemize}
 \end{columns}
 \end{frame}
-\iffalse
 \begin{frame}[fragile]{Functors in Programming}
  \begin{verbatim}
      data Maybe a = Nothing | Just a
@@ -239,11 +241,61 @@ Order Categories
  \end{columns}
 \end{frame}
 \begin{frame}{Natural Transformations}
+    \begin{itemize}
+     \item A structure-preserving map between functors.
+     \begin{itemize}
+      \item Let $F,G : \bC \to \bD$ be functors.
+      \item A natural transformation $\phi$ is an indexed family of morphisms $\phi_A \in \bD(F(A), G(A))$ from $F(A)$ to $G(A)$
+      \item These morphisms satisfy the following \textit{naturality condition}:
+      \begin{align*}
+       \forall f \in \bC(A,B) : \phi_B \circ F(f) = G(f) \circ \phi_A
+      \end{align*}
+     \end{itemize}
+     \item Given two functors $F$ and $G$, we write the collection of all natural transformation between them as $\text{Nat}(F, G)$.
+    \end{itemize}
 \end{frame}
-\begin{frame}{The Yoneda Embedding}
+\begin{frame}{Naturality from Polymorphism}
+    \begin{itemize}
+      \item The naturality condition resembles an equality we saw a few weeks ago: 
+      \begin{align*}
+       r_B \circ \texttt{map}(a) = \texttt{map}(a) \circ r_A
+      \end{align*}
+      \pause \item This is the free theorem we got for a parametrically polymorphic function \texttt{r :: [X] -> [X]} and an arbitrary function \texttt{a : A -> B}.
+      \pause \item This free theorem proves that $r$ is a natural transformation from the list functor to itself.
+    \end{itemize}
+\end{frame}
+\begin{frame}{Naturality from Polymorphism}
+    \begin{itemize}
+      \item In general, assume we have:
+      \begin{itemize}
+        \item two functors \texttt{F} and \texttt{G},
+        \item a parametrically polymorphic function \texttt{r : F x -> G x},
+        \item an arbitrary function \texttt{f : A -> B}.
+      \end{itemize}
+      \pause\item Then we get the following free theorem:
+      \begin{equation*}
+       \texttt{r . fmap f = fmap f . r}
+      \end{equation*}
+      %\item[] (Where the fmap on the left belongs to \texttt{F} and the one on the right belongs to \texttt{G})
+      \vspace{-18pt}
+      \pause\item In categorical notation:
+      \begin{equation*}
+        r_B \circ F(f) = G(f) \circ r_A
+      \end{equation*}
+      \vspace{-18pt}
+      \pause\item So our free theorem is a proof that any parametrically polymorphic function \texttt{r} is a natural transformation!
+      \pause\item It turns out that parametrically polymorphic functions correspond exactly to natural transformations between endofunctors $\bS et \to \bS et$.
+    \end{itemize}
 \end{frame}
 \begin{frame}{The Yoneda Lemma}
-Definition
+\begin{itemize}
+ \item The Yoneda Lemma states:
+ \begin{align*}
+  \text{Nat}
+ \end{align*}
+
+\end{itemize}
+
 \end{frame}
 \begin{frame}{The Yoneda Lemma}
 Proof
