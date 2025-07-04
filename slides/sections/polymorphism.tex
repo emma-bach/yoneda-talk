@@ -1,0 +1,30 @@
+\begin{frame}{Naturality from Polymorphism}
+    \begin{itemize}
+      \item In general, assume we have:
+      \begin{itemize}
+        \pause\item two functors \texttt{F} and \texttt{G},
+        \pause\item a parametrically polymorphic function \texttt{r : F x -> G x},
+        \pause\item an arbitrary function \texttt{f : A -> B}.
+      \end{itemize}
+      \pause\item Then we get the following free theorem:
+      \begin{equation*}
+       \texttt{r . fmap f = fmap f . r}
+      \end{equation*}
+      %\item[] (Where the fmap on the left belongs to \texttt{F} and the one on the right belongs to \texttt{G})
+      \vspace{-18pt}
+      \pause\item In categorical notation:
+      \begin{equation*}
+        r_B \circ F(f) = G(f) \circ r_A
+      \end{equation*}
+      \vspace{-18pt}
+      \pause\item So our free theorem is a proof that any parametrically polymorphic function \texttt{r} is a natural transformation!
+      \pause\item It turns out that parametrically polymorphic functions correspond exactly to natural transformations between endofunctors $\bS et \to \bS et$.
+    \end{itemize}
+\end{frame}
+\begin{frame}{Functor Categories}
+ \begin{itemize}
+  \item For any $\bC$, $\bD$, the collection of functors $\bC \to \bD$ form a category.
+  \pause\item This category is known as a \textit{functor category} and denoted $\bD^\bC$.
+  \pause\item A morphism $\bD^\bC(F, G)$ is a natural transformation $F \to G$.
+ \end{itemize}
+\end{frame}
