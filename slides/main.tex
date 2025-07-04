@@ -14,13 +14,11 @@
 \usepackage{tikz-cd}
 \tikzcdset{scale cd/.style={every label/.append style={scale=#1},
     cells={nodes={scale=#1}}}}
-
-\usepackage{babel}  
+ 
 \usepackage{siunitx}  
 \sisetup{locale = DE}
 \usepackage{multicol}
 \usepackage{listings}
-
 \usetikzlibrary{arrows.meta, angles, quotes, calc}
 
 %\usepackage[sorting=none]{biblatex}
@@ -34,6 +32,9 @@
 \newcommand{\bC}{\mathbb{C}}
 \newcommand{\bD}{\mathbb{D}}
 \newcommand{\bS}{\mathbb{S}}
+
+\newcommand{\yo}{ヨ}
+
 
 \title{What you needa know about Yoneda}
 \author{Emma Bach (she/her)}
@@ -287,15 +288,17 @@ Order Categories
       \pause\item It turns out that parametrically polymorphic functions correspond exactly to natural transformations between endofunctors $\bS et \to \bS et$.
     \end{itemize}
 \end{frame}
+
 \begin{frame}{The Yoneda Lemma}
-\begin{itemize}
- \item The Yoneda Lemma states:
- \begin{align*}
-  \text{Nat}
- \end{align*}
-
-\end{itemize}
-
+    \begin{itemize}
+        \item Let $F$ be a functor from $\bC$ to $\bS et$.
+        \pause\item The Yoneda Lemma states that:
+        \begin{align*}
+            \yo : \text{Nat}(\bC(A,-), F) \cong F(A))
+        \end{align*}
+        \pause\item Furthermore, this isomorphism $\yo$ ヨ is a natural transformation.
+        \pause\item So the set of natural transformations from the homfunctor $\bC(A,-)$ is in a one-to-one correspondence with the elements of the set $F(A)$.
+    \end{itemize}
 \end{frame}
 \begin{frame}{The Yoneda Lemma}
 Proof
