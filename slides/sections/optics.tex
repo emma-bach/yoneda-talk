@@ -92,7 +92,7 @@ type AdapterP a b s t = forall p. Profunctor p -> p a b -> p s t
 		\end{align*}
 		\end{itemize}
 \end{frame}
-\begin{frame}[fragile]{Equivalence of Profunctor Adapters}
+\begin{frame}[fragile]{Equivalence of the two representations}
 	\begin{itemize}
 		\item The Yoneda lemma tells us that for any functor $F$:
 		\begin{align*}
@@ -110,7 +110,7 @@ type AdapterP a b s t = forall p. Profunctor p -> p a b -> p s t
 		\end{align*}
 	\end{itemize}
 \end{frame}
-\begin{frame}[fragile]{Equivalence of Profunctor Adapters}
+\begin{frame}[fragile]{Equivalence of the two representations}
 	\begin{align*}
 		&\bAdaP ((A,B),(S,T))\\
 		&\simeq\ \bSet^{\bProf}(\bProf(\bAda((A, B), =), -), \bProf(\bAda((S, T), =), -))
