@@ -1,11 +1,35 @@
-\begin{frame}{Instances of the Yoneda Lemma}
+\begin{frame}{Cayley's Theorem}
 \begin{itemize}
- \item Cayley's theorem in group theory
- \item Countless theorems in algebra, particulary in algebraic topology
- \item Proofs by indirect inequality: $b \preceq a$ iff. $\forall c : (a \preceq c) \implies (b \preceq c)$
- \item Profunctor optics in functional programming
+	\item Every group $(G, *, e)$ is isomorphic to a subgroup of the group of permutations of $G$.
+	\pause\item Specifically:
+	\begin{itemize}
+		\item One side of the bijection is constructed by sending $g \in G$ to the permutation which maps $f_g : x \mapsto g * x$
+		\item The other side sends a permutation $f$ to the element $f(e)$
+	\end{itemize}
+	\pause\item The Yoneda lemma is often viewed as a generalization of Cayley's theorem.
 \end{itemize}
-
 \end{frame}
-\begin{frame}{Profunctor Optics}
+\begin{frame}{Exercise 1 - Cayley's Theorem for Monoids}
+	Use the Yoneda embedding to show that every monoid $M$ is isomorphic to a monoid of functions $M \to M$. 
+	\\
+	\textbf{Hint 1:} The Yoneda embedding gives an isomorphism between objects and their homfunctors. \\
+	\textbf{Hint 2:} Two weeks ago we saw that every monoid $M$ defines a category with a single object $*$ and a morphism $m$ for each element $m \in M$. 
+\end{frame}
+\begin{frame}[fragile]{Exercise 1 - Cayley's Theorem for Monoids}
+	\begin{columns}
+		\column{0.3\textwidth}
+		\[\begin{tikzcd}
+			A && B \\
+			\\
+			{\mathbb{C}(A, -)} && {C(B,-)}
+			\arrow["{f\ \in\ \mathbb{C}(A,B)}", from=1-1, to=1-3]
+			\arrow["{\mathcal{Y}}"', dotted, leftrightarrow, from=1-1, to=3-1]
+			\arrow["{\mathcal{Y}}", dotted, leftrightarrow, from=1-3, to=3-3]
+			\arrow["{\mathcal{Y}(f)}"', from=3-1, to=3-3]
+		\end{tikzcd}\]
+		\column{0.7\textwidth}
+		\begin{itemize}
+			\item The Yoneda embedding is an isomorphism mapping each object to its homfunctor.
+		\end{itemize}
+	\end{columns}
 \end{frame}

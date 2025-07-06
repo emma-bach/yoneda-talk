@@ -1,0 +1,93 @@
+\begin{frame}[fragile]{The Yoneda Embedding}
+	\begin{columns}
+		\column{0.3\textwidth}
+		\[\begin{tikzcd}
+			A && B \\
+			\\
+			{\mathbb{C}(A, -)} && {C(B,-)}
+			\arrow["{f\ \in\ \mathbb{C}(A,B)}", from=1-1, to=1-3]
+			\arrow["{\mathcal{Y}}"', dotted, leftrightarrow, from=1-1, to=3-1]
+			\arrow["{\mathcal{Y}}", dotted, leftrightarrow, from=1-3, to=3-3]
+			\arrow["{\mathcal{Y}(f)}"', from=3-1, to=3-3]
+		\end{tikzcd}\]
+		\column{0.7\textwidth}
+		\begin{itemize}
+			\item Remember that the goal is finding out everything about an object $A$ through its relations to other objects.
+			\pause\item So we want to describe an object through a collection of its homsets.
+			\pause\item Formally, we want a bijective functor
+			\begin{align*}
+				\mY : \bC &\to \bS et^\bC\\
+				A &\mapsto \bC(A,-)
+			\end{align*}
+			\vspace{-16pt}\pause\item We call $\mY$ the \textit{Yoneda embedding}.
+			\pause\item Given $f \in \bC(A,B)$, $\mY(f)$ has to be a morphism between $\bC(A, -)$ and $\bC(B, -)$ in the functor category $\bS et^{\bC}$.
+			\pause\item Therefore, $\mY(f)$ has to be a natural transformation between $\bC(A, -)$ and $\bC(B, -)$
+		\end{itemize}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{The Yoneda lemma}
+	\begin{itemize}
+		\item It turns out we can do even better!
+		\pause\item We can construct the set of all natural transformations between $\bC(A, -)$ and \underline{any} Functor $F :\bC \to \bS et$.
+		\pause\item Specifically, the Yoneda lemma states that:
+		\begin{align*}
+			\text{Nat}(\bC(A,-), F) \simeq F(A)
+		\end{align*}
+		\begin{itemize}
+			\vspace{-18pt}\pause\item Furthermore, this isomorphism is a natural transformation.
+			\pause\item So we can construct the Yoneda embedding $\mY$ from the set $F(A)$.
+			\pause\item Vice versa, if we know all natural transformations $\text{Nat}(\bC(A,-), F)$, we can construct the set $F(A)$.
+		\end{itemize}
+		\pause\item Note that this is the \textit{covariant} version of the Yoneda lemma. The lemma is sometimes stated equivalently in terms of the \textit{contravariant homfunctor}  $\bC(-,A)$.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Constructing the bijection}
+	\begin{columns}
+		\column{0.3\textwidth}
+		\[\begin{tikzcd}
+			A && B \\
+			{\bC(A,A)} && {\bC(A,B)} \\
+			\\
+			{F(A)} && {F(B)}
+			\arrow["f", from=1-1, to=1-3]
+			\arrow["{\bC(A,f) = f \circ}", from=2-1, to=2-3]
+			\arrow["{\phi_A}"{description}, from=2-1, to=4-1]
+			\arrow["{\phi_B}"{description}, from=2-3, to=4-3]
+			\arrow["{F(f)}", from=4-1, to=4-3]
+		\end{tikzcd}\]
+		
+		\column{0.7\textwidth}
+		\begin{itemize}
+			\item Let $\phi \in \text{Nat}(\bC(A,-), F)$. Since $\phi$ is natural transformation, we have
+			\[F(f) \circ \phi_A = \phi_B \circ f \circ\]
+			\pause\item Remember that these functors are $\bC \to \bS et$.
+			\pause\item This means our morphisms are just regular set functions.
+		\end{itemize}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Constructing the bijection}
+	\begin{columns}
+		\column{0.4\textwidth}
+		\[\begin{tikzcd}
+			A && B \\
+			{id_A} && {f} \\
+			\\
+			{u \in F(A)} && {\phi_B(f) = F(f)(u)}
+			\arrow["f", from=1-1, to=1-3]
+			\arrow["{\bC(A,f) = f \circ}", from=2-1, to=2-3]
+			\arrow["{\phi_A}"{description}, from=2-1, to=4-1]
+			\arrow["{\phi_B}"{description}, from=2-3, to=4-3]
+			\arrow["{F(f)}", from=4-1, to=4-3]
+		\end{tikzcd}\]
+		
+		\column{0.6\textwidth}
+		\begin{itemize}
+			\item If we apply these functions to the identity morphism $id_A$, we get:
+			\[\phi_B(f \circ id_A) = F(f)(\phi_A(id_A))\]
+			\[\phi_B(f) = F(f)(\phi_A(id_A)) := F(f)(u)\]
+		\end{itemize}
+	\end{columns}
+\end{frame}
