@@ -1,0 +1,141 @@
+\lstset{
+	frame=none,
+	xleftmargin=2pt,
+	stepnumber=1,
+	numbers=left,
+	numbersep=5pt,
+	numberstyle=\ttfamily\tiny\color[gray]{0.3},
+	belowcaptionskip=\bigskipamount,
+	captionpos=b,
+	escapeinside={*'}{'*},
+	language=haskell,
+	tabsize=2,
+	emphstyle={\bf},
+	commentstyle=\it,
+	stringstyle=\mdseries\rmfamily,
+	showspaces=false,
+	keywordstyle=\bfseries\rmfamily,
+	columns=flexible,
+	basicstyle=\small\sffamily,
+	showstringspaces=false,
+	morecomment=[l]\%,
+}
+\begin{frame}[fragile]{Profunctor Optics}
+	\begin{itemize}
+		\item In functional programming, an \textit{optic} is generally a data structure including some "outer type" \texttt{S} and some "inner type" \texttt{A}.
+		\pause\item In general, this involves some sort of \texttt{get} function, which allows access to the inner value, and a \texttt{set} function, which changes the inner value.
+		\pause\item \textit{Profunctor optics} are neat and flexible representations of optics as individual polymorphic function.
+		\pause\item In particular, profunctor optics make composition of optics trivial.
+		\pause\item Equivalence between optics and their profunctor representations comes down to the Yoneda lemma.
+	\end{itemize}
+\end{frame}
+\begin{frame}[fragile]{Adapters}
+	\begin{lstlisting}
+data Adapter a b s t = Adapter { from :: s -> a, to :: b -> t }
+	\end{lstlisting}
+	\begin{itemize}
+		\item \texttt{s} and \texttt{t} are assumed to be composite types containing values of types \texttt{a} and \texttt{b} respectively.
+		\pause\item Categorically, this translates to a pair of morphisms $\bC(S,A) \times \bC(B,T)$. 
+		\pause\item This is a morphism in the corresponding product category $(\bC^{op} \times \bC)((A,B), (S,T))$
+		\pause\item We can compose adapters with matching types and define an identity adapter \texttt{Adapter id id}.
+		\pause\item This lets us equivalently view a category $\bC^{op} \times \bC$ as the category $\bAda$ of adapters of objects of $\bC$.
+	\end{itemize}
+\end{frame}
+\begin{frame}[fragile]{Profunctors}
+	\begin{itemize}
+		\item A \textit{profunctor} is a functor $\bC^{op} \times \bC \to \bSet$.
+		\pause\item As Haskell code:
+		\begin{lstlisting}
+class Profunctor p where
+	dimap :: (c -> a) -> (b -> d) -> p a b -> p c d
+		\end{lstlisting}
+		\pause\item The canonical example of a profunctor is the function type former, 
+		
+		where \texttt{dimap} is function composition:
+		\begin{lstlisting}
+instance Profunctor (->) where
+	dimap f g h = g . h . f
+		\end{lstlisting}
+		\pause\item We define the category $\bProf$ to be the functor category $\bSet^(\bC^{op} \times \bC) = \bSet^\bAda$
+	\end{itemize}
+\end{frame}
+\begin{frame}[fragile]{Functor Application as a Functor}
+	\begin{columns}
+		\column{0.3\textwidth}
+		\[\begin{tikzcd}
+			F && G \\
+			\\
+			{F(A)} && {G(A)}
+			\arrow["{\eta}", from=1-1, to=1-3]
+			\arrow["{-(A)}"', dotted, from=1-1, to=3-1]
+			\arrow["{-(A)}", dotted, from=1-3, to=3-3]
+			\arrow["{\eta_A}"', from=3-1, to=3-3]
+		\end{tikzcd}\]
+		\column{0.7\textwidth}
+		\begin{itemize}
+			\item Given a category $\bC$, the operation of applying a functor $F : \bC \to \bSet$ to an object $A \in |\bC|$ is itself a functor from $\bSet^\bC$ to $\bC$.
+			\pause\item We write $-(A)$ for this functor.
+		\end{itemize}
+	\end{columns}
+\end{frame}
+\begin{frame}[fragile]{Profunctor Adapters}
+	\begin{itemize}
+		\item The profunctor representation of an adapter is given by:
+		\begin{lstlisting}
+type AdapterP a b s t = forall p. Profunctor p -> p a b -> p s t
+		\end{lstlisting}
+		\pause\item As we saw earlier, the polymorphism makes \texttt{AdapterP} a natural transformation.
+		\pause\item We define $\bAdaP$ as the functor category whose objects are those of $\bAda = \bC^{op} \times \bC$, but whose morphisms are profunctor adapters.
+		\pause\item The homsets in $\bAdaP$ are defined as:
+		\begin{align*}
+			\bAdaP ((A,B),(S,T)) &= \bSet^\bProf(-(A, B), -(S, T))\\
+		\end{align*}
+		\end{itemize}
+\end{frame}
+\begin{frame}[fragile]{Equivalence of Profunctor Adapters}
+	\begin{itemize}
+		\item The Yoneda lemma tells us that for any functor $F$:
+		\begin{align*}
+			F(A) \simeq \bSet^\bC(\bC(A, -), F)
+		\end{align*}
+		\pause\item If we remove the reference to any specific functor, we get:
+		\begin{align*}
+			-(A) \simeq \bSet^\bC(\bC(A, =), -)
+		\end{align*}
+		\vspace{-18pt}\pause\item So we have:
+		\begin{align*}
+			&\bAdaP ((A,B),(S,T))\\
+			&=\ \bSet^{\bProf}(-(A, B), -(S, T))\\ 
+			&\simeq\ \bSet^{\bProf}(\bProf(\bAda((A, B), =), -), \bProf(\bAda((S, T), =), -))\\
+		\end{align*}
+	\end{itemize}
+\end{frame}
+\begin{frame}[fragile]{Equivalence of Profunctor Adapters}
+	\begin{align*}
+		&\bAdaP ((A,B),(S,T))\\
+		&\simeq\ \bSet^{\bProf}(\bProf(\bAda((A, B), =), -), \bProf(\bAda((S, T), =), -))
+	\end{align*}
+	\vspace{-16pt}
+	\begin{itemize}
+		\item Applying the Yoneda embedding of the functor category $\bProf = \bSet^{\bAda}$ gives:
+		\begin{align*}
+			&\bSet^{\bProf}(\bProf(\bAda((A, B), =), -), \bProf(\bAda((S, T), =), -))\\ 
+			&\simeq\  \bProf(\bAda((A,B), =), \bAda((S,T), =))
+		\end{align*}
+		\item Applying the Yoneda embedding again, this time of the category $\bAda$, gives:
+		\begin{align*}
+			&\bProf(\bAda((A,B), =), \bAda((S,T), =))\\
+			&=\ \bSet^\bAda(\bAda((A,B), =), \bAda((S,T), =))\\
+			&\simeq\ \bAda((A,B), (S,T))
+		\end{align*}
+	\end{itemize}
+\end{frame}
+\begin{frame}{Summary}
+	\begin{itemize}
+		\item The Yoneda lemma is a fundamental result in category.
+		\pause\item The lemma states that the set of natural transformations between a homfunctor $\bC(A, -)$ and an arbitrary functor $F : \bC \to \bSet$ is naturally isomorphic to the set $F(A)$.
+		\pause\item The Yoneda lemma enables the use of the Yoneda embedding, which is a natural isomorphism between a category $\bC$ and the category of homfunctors on $\bC$.
+		\pause\item Using the Yoneda embedding twice, we have shown the equivalence of adapters and profunctor adapters.
+		\pause\item Similar techniques can be used to show the equivalence of any optic and its profunctor representation.
+	\end{itemize}
+\end{frame}

@@ -1,8 +1,8 @@
 \begin{frame}{Motivation}
  \begin{itemize}
-  \item A common sentiment in many cultures is the idea that people are defined by how they interact with their surroundings.
+  \item A common sentiment in many cultures is the idea that things are defined by how they interact with their surroundings.
   \pause\item ``\textit{Tell me your company, and I will tell you what you are.}''\footnote{Quoted as a proverb in \textit{Don Quixote}}
-  \pause\item The Yoneda Lemma is the result of applying this way of thinking to mathematical objects within the extremely general setting of \textit{category theory}.
+  \pause\item The Yoneda Lemma is the result of applying this way of thinking to mathematical objects in category theory.
   \pause\item As a result, a category $\bC$ is often best understood by instead studying functors from that category into $\mathbb{S}et$.
  \end{itemize}
 \end{frame}
@@ -91,7 +91,7 @@ A \textit{category} $\bC$ consists of:
 \end{frame}
 \begin{frame}{Exercise 1 : Order Categories}
 \begin{itemize}
-	\item[a)] Let $\leq$ be a reflexive, transitive order (a \textit{preorder}) on a set $M$. Show that if we define objects by $|\bPre(M, \leq)| = M$ and morphisms by $f_{x \leq y} \in \bPre(x,y) \Leftrightarrow x \leq y$, then $\bPre(M, \leq)$ forms a category.
+	\item[a)] Let $\leq$ be a reflexive, transitive order (a \textit{preorder}) on a set $M$. Show that if we define objects by $|\bPre(M, \leq)| = M$ and morphisms by $\exists! f_{x \leq y} \in \bPre(x,y) \Leftrightarrow x \leq y$, then $\bPre(M, \leq)$ forms a category.
 	\item[b)] Let $F : \bM \to \bM$ be an endofunctor on $\bM$. Show that $F$ defines a monotonic function $M \to M$, i.e. $\forall x,y : x \leq y \implies F(x) \leq F(y)$.
 	\item[c)] Let $F,G : M \to M$ be monotonic functions. Let $\phi$ be a natural transformation $F \to G$. Show that $\forall x \in M: F(x) \leq G(x)$.
 \end{itemize}
@@ -134,7 +134,7 @@ A \textit{category} $\bC$ consists of:
 		\end{tikzcd}\]
 		\column{0.5\textwidth}
 		\begin{itemize}
-			\item By the definition of functors, $F$ must take each morphism $f : x \leq y$ to a morphism $F(f)_{F(x) \leq F(y)}$.
+			\item By the definition of functors, $F$ must take each morphism $f_{x \leq y} \in \bPre(x,y)$ to a morphism $F(f)_{F(x) \leq F(y)} \in \bPre(F(x),F(y))$.
 		\end{itemize} 
 	\end{columns} 
 \end{frame}
@@ -146,7 +146,7 @@ A \textit{category} $\bC$ consists of:
 			F(x)\\
 			\\
 			{G(x)}
-			\arrow["\phi_x", from=1-1, to=3-1]
+			\arrow["\phi_x\ :\ F(x) \leq G(x)", from=1-1, to=3-1]
 		\end{tikzcd}\]
 		\column{0.7\textwidth}
 		\begin{itemize}
