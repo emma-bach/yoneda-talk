@@ -1,4 +1,14 @@
 \begin{frame}{Naturality from Polymorphism}
+	\begin{itemize}
+		\item The naturality condition resembles an equality we saw a few weeks ago:
+		\begin{align*}
+			r_B \circ \texttt{map}(a) = \texttt{map}(a) \circ r_A
+		\end{align*}
+		\pause \item This is the free theorem we got for a parametrically polymorphic function \texttt{r :: [X] -> [X]} and an arbitrary function \texttt{a : A -> B}.
+		\pause \item This free theorem is equivalent to the statement that $r$ is a natural transformation.
+	\end{itemize}
+\end{frame}
+\begin{frame}{Naturality from Polymorphism}
     \begin{itemize}
       \item In general, assume we have:
       \begin{itemize}
@@ -21,6 +31,44 @@
       \pause\item It turns out that parametrically polymorphic functions correspond exactly to natural transformations between endofunctors $\bS et \to \bS et$.
     \end{itemize}
 \end{frame}
+\begin{frame}[fragile]{Homfunctors}
+	\begin{columns}
+		\column{0.3\textwidth}
+		% https://q.uiver.app/#q=WzAsMyxbMCwwLCJBIl0sWzIsMiwiQyJdLFsyLDAsIkIiXSxbMCwxLCJmIFxcY2lyYyBnIiwxXSxbMCwyLCJmIiwxXSxbMiwxLCJnIiwxXV0=
+		\[\begin{tikzcd}
+			A && B \\
+			\\
+			&& C
+			\arrow["f"{description}, from=1-1, to=1-3]
+			\arrow["{g \circ f}"{description}, from=1-1, to=3-3]
+			\arrow["g"{description}, from=1-3, to=3-3]
+		\end{tikzcd}\]
+		% https://q.uiver.app/#q=WzAsNCxbNCwwXSxbMCwwLCJcXHtpZF9BXFx9Il0sWzIsMCwiXFx7ZlxcfSJdLFsyLDIsIlxce2YgXFxjaXJjIGdcXH0iXSxbMSwyLCJmIFxcY2lyYyIsMV0sWzIsMywiZyBcXGNpcmMiLDFdLFsxLDMsImYgXFxjaXJjIGcgXFxjaXJjIiwxXV0=
+		\[\begin{tikzcd}
+			{\{id_A\}} && {\{f\}} && {} \\
+			\\
+			&& {\{g \circ f\}}
+			\arrow["{f \circ}"{description}, from=1-1, to=1-3]
+			\arrow["{g \circ f \circ}"{description}, from=1-1, to=3-3]
+			\arrow["{g \circ}"{description}, from=1-3, to=3-3]
+		\end{tikzcd}\]
+		\column{0.7\textwidth}
+		\begin{itemize}
+			\item For any category $\bC$, a homset $\bC(A,B)$ is a set of morphisms.
+			\pause\item We define a functor $\bC(A, -) : \bC \to \mathbb{S}et$:
+			\begin{itemize}
+				\pause\item $\bC(A, -)$ maps an Object $B$ to the Homset $\bC(A,B)$
+				\pause\item A morphism $f : \bC(B,C)$ is mapped to the morphism $f \circ : \bC(A,B) \to \bC(A,C)$
+			\end{itemize}
+			\pause\item Similarly, $\bC(-, B)$ is a functor $\bC^{op} \to \mathbb{S}et$:
+			\begin{itemize}
+				\pause\item $\bC(-, B)$ maps an Object $A$ to the Homset $\bC(A,B)$
+				\pause\item A morphism $f : \bC(B,A)$ is mapped to the morphism $\circ f: \bC(A,C) \to \bC(B,C)$
+			\end{itemize}
+		\end{itemize}
+	\end{columns}
+\end{frame}
+
 \begin{frame}{Functor Categories}
  \begin{itemize}
   \item For any $\bC$, $\bD$, the collection of functors $\bC \to \bD$ form a category.
