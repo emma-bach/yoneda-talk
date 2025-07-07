@@ -121,26 +121,26 @@ type AdapterP a b s t =
 		\vspace{-18pt}\pause\item So we have:
 		\begin{align*}
 			&\bAdaP ((A,B),(S,T))\\
-			&=\ \bSet^{\bProf}(-(A, B), -(S, T))\\ 
-			&\simeq\ \bSet^{\bProf}(\bSet^\bAda(\bAda((A, B), =), -), \bSet^\bAda(\bAda((S, T), =), -))\\
+			&=\ \bSet^{\bProf}(-(A, B), -(S, T)) =\ \bSet^{\bSet^\bAda}(-(A, B), -(S, T)) \\ 
+			&\simeq\ \bSet^{\bSet^\bAda}(\bSet^\bAda(\bAda((A, B), =), -), \bSet^\bAda(\bAda((S, T), =), -))\\
 		\end{align*}
 	\end{itemize}
 \end{frame}
 \begin{frame}[fragile]{Equivalence of the two representations}
 	\begin{align*}
 		&\bAdaP ((A,B),(S,T))\\
-		&\simeq\ \bSet^{\bProf}(\bSet^\bAda(\bAda((A, B), =), -), \bSet^\bAda(\bAda((S, T), =), -))
+		&\simeq\ \bSet^{\bSet^\bAda}(\bSet^\bAda(\bAda((A, B), =), -), \bSet^\bAda(\bAda((S, T), =), -))
 	\end{align*}
 	\vspace{-16pt}
 	\begin{itemize}
-		\item Applying the Yoneda embedding once, we get an isomorphism between profunctor adapters and profunctors:
+		\item The Yoneda Embedding tells us $\bSet^\bAda$
 		\begin{align*}
-			&\bSet^{\bProf}(\bSet^\bAda(\bAda((A, B), =), -), \bSet^\bAda(\bAda((S, T), =), -))\\ 
-			&\simeq\  \bProf(\bAda((A,B), =), \bAda((S,T), =))
+			&\bSet^{\bSet^\bAda}(\bSet^\bAda(\bAda((A, B), =), -), \bSet^\bAda(\bAda((S, T), =), -))\\ 
+			&\simeq\  \bSet^\bAda(\bAda((A,B), =), \bAda((S,T), =))
 		\end{align*}
-		\item Applying the Yoneda embedding again gives an isomorphism between profunctors and adapters:
+		\item The Yoneda Embedding also tells us 
 		\begin{align*}
-			&\bProf(\bAda((A,B), =), \bAda((S,T), =))\\
+			&\bSet^\bAda(\bAda((A,B), =), \bAda((S,T), =))\\
 			&=\ \bSet^\bAda(\bAda((A,B), =), \bAda((S,T), =))\\
 			&\simeq\ \bAda((A,B), (S,T))
 		\end{align*}
@@ -149,8 +149,13 @@ type AdapterP a b s t =
 \fi
 \begin{frame}{Equivalence of the representations}
 	\begin{align*}
-		\bSet^{\bProf}(-(A, B), -(S, T)) \overset{?}{\simeq} \bAda((A,B), (S,T))
+		\bSet^{\bSet^\bAda}(-(A, B), -(S, T)) \simeq \bAda((A,B), (S,T))
 	\end{align*}
+	\begin{itemize}
+		\pause\item So the proof comes down to showing that a set of natural transformations of natural transformations between the application functors is isomorphic to the underlying set of morphisms.
+		\pause\item This involves expanding the functors on the left using the Yoneda lemma and then summarizing everything by applying the yoneda embedding twice.
+		\pause\item This proof is left as an exercise to the reader :) \pause(a short version of the proof is uploaded alongside the slides on ilias).
+	\end{itemize}
 \end{frame}
 \begin{frame}{Summary}
 	\begin{itemize}
