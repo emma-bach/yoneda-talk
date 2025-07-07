@@ -1,0 +1,84 @@
+\documentclass[aspectratio=169]{beamer} % dvipsnames gives more built-in colors
+\usepackage{graphicx} % Required for inserting images
+\usepackage{transparent}
+\usepackage{float}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage[font=scriptsize,labelfont=bf]{caption}
+\usepackage{listings}
+\usepackage{animate}
+\usepackage{subfiles}
+\usepackage{listings}
+\renewcommand{\footnotesize}{\tiny}
+
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\tikzcdset{scale cd/.style={every label/.append style={scale=#1},
+		cells={nodes={scale=#1}}}}
+\usepackage{siunitx}
+\sisetup{locale = DE}
+\usepackage{multicol}
+\usepackage{listings}
+\usetikzlibrary{arrows.meta, angles, quotes, calc}
+
+%\usepackage[sorting=none]{biblatex}structuring large files
+\usepackage[german=guillemets]{csquotes}
+\setquotestyle{english}
+%\addbibresource{bibliography.bib}
+
+\usetheme{ufr}
+\usecolortheme{ufr}
+
+\newcommand{\bAda}{{\mathbb{A}da}}
+\newcommand{\bAdaP}{\mathbb{A}daP}
+\newcommand{\bC}{\mathbb{C}}
+\newcommand{\bD}{\mathbb{D}}
+\newcommand{\bHask}{\mathbb{H}ask}
+\newcommand{\bM}{\mathbb{M}}
+\newcommand{\bPre}{\mathbb{P}re}
+\newcommand{\bProf}{{\mathbb{P}rof}}
+\newcommand{\bS}{\mathbb{S}}
+\newcommand{\bSet}{\mathbb{S}et}
+
+\newcommand{\mY}{\mathcal{Y}}
+
+\begin{document}
+\begin{frame}[fragile]{Equivalence of the two representations}
+	\begin{itemize}
+		\item The Yoneda lemma tells us that for any functor $F$:
+		\begin{align*}
+			F(A) \simeq \bSet^\bC(\bC(A, =), F)
+		\end{align*}
+		\pause\item If we remove the reference to any specific functor, we get:
+		\begin{align*}
+			-(A) \simeq \bSet^\bC(\bC(A, =), -)
+		\end{align*}
+		\vspace{-18pt}\pause\item So we have:
+		\begin{align*}
+			&\bAdaP ((A,B),(S,T))\\
+			&=\ \bSet^{\bProf}(-(A, B), -(S, T))\\ 
+			&\simeq\ \bSet^{\bProf}(\bSet^\bAda(\bAda((A, B), =), -), \bSet^\bAda(\bAda((S, T), =), -))\\
+		\end{align*}
+	\end{itemize}
+\end{frame}
+\begin{frame}[fragile]{Equivalence of the two representations}
+	\begin{align*}
+		&\bAdaP ((A,B),(S,T))\\
+		&\simeq\ \bSet^{\bProf}(\bSet^\bAda(\bAda((A, B), =), -), \bSet^\bAda(\bAda((S, T), =), -))
+	\end{align*}
+	\vspace{-16pt}
+	\begin{itemize}
+		\item Applying the Yoneda embedding once, we get an isomorphism between profunctor adapters and profunctors:
+		\begin{align*}
+			&\bSet^{\bProf}(\bSet^\bAda(\bAda((A, B), =), -), \bSet^\bAda(\bAda((S, T), =), -))\\ 
+			&\simeq\  \bProf(\bAda((A,B), =), \bAda((S,T), =))
+		\end{align*}
+		\item Applying the Yoneda embedding again gives an isomorphism between profunctors and adapters:
+		\begin{align*}
+			&\bProf(\bAda((A,B), =), \bAda((S,T), =))\\
+			&=\ \bSet^\bAda(\bAda((A,B), =), \bAda((S,T), =))\\
+			&\simeq\ \bAda((A,B), (S,T))
+		\end{align*}
+	\end{itemize}
+\end{frame}
+\end{document}

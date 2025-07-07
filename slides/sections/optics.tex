@@ -99,19 +99,20 @@ type AdapterP a b s t =
 	forall p. Profunctor p -> p a b -> p s t
 			\end{lstlisting}
 			\pause\item As we saw earlier, the polymorphism makes \texttt{AdapterP} a natural transformation.
-			\pause\item We define $\bAdaP$ as the functor category whose objects are those of $\bAda = \bHask^{op} \times \bHask$, but whose morphisms are profunctor adapters.
-			\pause\item The homsets in $\bAdaP$ are defined as:
+			\pause\item We define $\bAdaP$ as the functor category where objects are $|\bAdaP| = |\bAda| = |\bHask^{op} \times \bHask|$, and whose morphisms are profunctor adapters.
+			\pause\item Specifically, the homsets in $\bAdaP$ are:
 			\begin{align*}
 				\bAdaP ((A,B),(S,T)) &= \bSet^\bProf(-(A, B), -(S, T))\\
 			\end{align*}
 		\end{itemize}
 	\end{columns}
 \end{frame}
+\iffalse
 \begin{frame}[fragile]{Equivalence of the two representations}
 	\begin{itemize}
 		\item The Yoneda lemma tells us that for any functor $F$:
 		\begin{align*}
-			F(A) \simeq \bSet^\bC(\bC(A, -), F)
+			F(A) \simeq \bSet^\bC(\bC(A, =), F)
 		\end{align*}
 		\pause\item If we remove the reference to any specific functor, we get:
 		\begin{align*}
@@ -121,23 +122,23 @@ type AdapterP a b s t =
 		\begin{align*}
 			&\bAdaP ((A,B),(S,T))\\
 			&=\ \bSet^{\bProf}(-(A, B), -(S, T))\\ 
-			&\simeq\ \bSet^{\bProf}(\bProf(\bAda((A, B), =), -), \bProf(\bAda((S, T), =), -))\\
+			&\simeq\ \bSet^{\bProf}(\bSet^\bAda(\bAda((A, B), =), -), \bSet^\bAda(\bAda((S, T), =), -))\\
 		\end{align*}
 	\end{itemize}
 \end{frame}
 \begin{frame}[fragile]{Equivalence of the two representations}
 	\begin{align*}
 		&\bAdaP ((A,B),(S,T))\\
-		&\simeq\ \bSet^{\bProf}(\bProf(\bAda((A, B), =), -), \bProf(\bAda((S, T), =), -))
+		&\simeq\ \bSet^{\bProf}(\bSet^\bAda(\bAda((A, B), =), -), \bSet^\bAda(\bAda((S, T), =), -))
 	\end{align*}
 	\vspace{-16pt}
 	\begin{itemize}
-		\item Applying the Yoneda embedding of the functor category $\bProf = \bSet^{\bAda}$ gives:
+		\item Applying the Yoneda embedding once, we get an isomorphism between profunctor adapters and profunctors:
 		\begin{align*}
-			&\bSet^{\bProf}(\bProf(\bAda((A, B), =), -), \bProf(\bAda((S, T), =), -))\\ 
+			&\bSet^{\bProf}(\bSet^\bAda(\bAda((A, B), =), -), \bSet^\bAda(\bAda((S, T), =), -))\\ 
 			&\simeq\  \bProf(\bAda((A,B), =), \bAda((S,T), =))
 		\end{align*}
-		\item Applying the Yoneda embedding again, this time of the category $\bAda$, gives:
+		\item Applying the Yoneda embedding again gives an isomorphism between profunctors and adapters:
 		\begin{align*}
 			&\bProf(\bAda((A,B), =), \bAda((S,T), =))\\
 			&=\ \bSet^\bAda(\bAda((A,B), =), \bAda((S,T), =))\\
@@ -145,12 +146,18 @@ type AdapterP a b s t =
 		\end{align*}
 	\end{itemize}
 \end{frame}
+\fi
+\begin{frame}{Equivalence of the representations}
+	\begin{align*}
+		\bSet^{\bProf}(-(A, B), -(S, T)) \overset{?}{\simeq} \bAda((A,B), (S,T))
+	\end{align*}
+\end{frame}
 \begin{frame}{Summary}
 	\begin{itemize}
 		\item The Yoneda lemma is a fundamental result in category theory.
 		\pause\item The lemma states that the set of natural transformations between a homfunctor $\bC(A, -)$ and an arbitrary functor $F : \bC \to \bSet$ is naturally isomorphic to the set $F(A)$.
 		\pause\item The Yoneda lemma enables the use of the Yoneda embedding, which is a natural isomorphism between a category $\bC$ and the category of homfunctors on $\bC$.
-		\pause\item Using the Yoneda embedding twice, we have shown the equivalence of adapters and profunctor adapters.
+		\pause\item Equivalence of adapters and profunctor adapters can be shown by applying the Yoneda embedding twice.
 		\pause\item Similar techniques can be used to show the equivalence of any optic and its profunctor representation.
 	\end{itemize}
 \end{frame}

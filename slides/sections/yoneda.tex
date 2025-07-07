@@ -1,3 +1,67 @@
+\begin{frame}[fragile]{Homfunctors}
+	\begin{columns}
+		\column{0.3\textwidth}
+		% https://q.uiver.app/#q=WzAsMyxbMCwwLCJBIl0sWzIsMiwiQyJdLFsyLDAsIkIiXSxbMCwxLCJmIFxcY2lyYyBnIiwxXSxbMCwyLCJmIiwxXSxbMiwxLCJnIiwxXV0=
+		\[\begin{tikzcd}
+			A && B \\
+			\\
+			&& C
+			\arrow["f"{description}, from=1-1, to=1-3]
+			\arrow["{g \circ f}"{description}, from=1-1, to=3-3]
+			\arrow["g"{description}, from=1-3, to=3-3]
+		\end{tikzcd}\]
+		% https://q.uiver.app/#q=WzAsNCxbNCwwXSxbMCwwLCJcXHtpZF9BXFx9Il0sWzIsMCwiXFx7ZlxcfSJdLFsyLDIsIlxce2YgXFxjaXJjIGdcXH0iXSxbMSwyLCJmIFxcY2lyYyIsMV0sWzIsMywiZyBcXGNpcmMiLDFdLFsxLDMsImYgXFxjaXJjIGcgXFxjaXJjIiwxXV0=
+		\[\begin{tikzcd}
+			{\bC(A,A)} && {\bC(A,B)}\\
+			\\
+			&& {\bC(A,C)}
+			\arrow["{f \circ}"{description}, from=1-1, to=1-3]
+			\arrow["{g \circ f \circ}"{description}, from=1-1, to=3-3]
+			\arrow["{g \circ}"{description}, from=1-3, to=3-3]
+		\end{tikzcd}\]
+		\column{0.7\textwidth}
+		\begin{itemize}
+			\item For any category $\bC$, a homset $\bC(A,B)$ is a set of morphisms.
+			\pause\item We define a functor $\bC(A, -) : \bC \to \mathbb{S}et$:
+			\begin{itemize}
+				\pause\item $\bC(A, -)$ maps an Object $B$ to the Homset $\bC(A,B)$
+				\pause\item A morphism $f : \bC(B,C)$ is mapped to the morphism $f \circ : \bC(A,B) \to \bC(A,C)$
+			\end{itemize}
+			\pause\item Similarly, $\bC(-, B)$ is a functor $\bC^{op} \to \mathbb{S}et$:
+			\begin{itemize}
+				\pause\item $\bC(-, B)$ maps an Object $A$ to the Homset $\bC(A,B)$
+				\pause\item A morphism $f : \bC(C,A)$ is mapped to the morphism $\circ f: \bC(A,B) \to \bC(C,B)$
+			\end{itemize}
+		\end{itemize}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Functor Categories}
+	\begin{itemize}
+		\item For any $\bC$, $\bD$, the collection of functors $\bC \to \bD$ form a category.
+		\pause\item This category is known as a \textit{functor category} and denoted $\bD^\bC$.
+		\pause\item A morphism $\phi \in \bD^\bC(F, G)$ is a natural transformation $F \to G$.
+	\end{itemize}
+\end{frame}
+\begin{frame}[fragile]{The Yoneda Embedding}
+	% https://q.uiver.app/#q=WzAsMTIsWzIsMiwiQSJdLFswLDEsIkIiXSxbMSwwLCJDIl0sWzMsMCwiRCJdLFs0LDEsIkUiXSxbNCwzLCJGIl0sWzMsNCwiRyJdLFsxLDQsIkgiXSxbMCwzLCJJIl0sWzYsMiwiXFxtYXRoYmJ7Q30oQSwgLSkiXSxbNCwyXSxbNSwyXSxbMCwyXSxbMCwzXSxbMCw0XSxbMCw1XSxbMCw2XSxbMCw3XSxbMCw4XSxbMCwxXSxbMTAsMTEsIiIsMix7ImxldmVsIjoyfV1d
+	\[\begin{tikzcd}
+		& C && D \\
+		B &&&& E \\
+		&& A && {} & {} & {\mathbb{C}(A, -)} \\
+		I &&&& F \\
+		& H && G
+		\arrow[from=3-3, to=1-2]
+		\arrow[from=3-3, to=1-4]
+		\arrow[from=3-3, to=2-1]
+		\arrow[from=3-3, to=2-5]
+		\arrow[from=3-3, to=4-1]
+		\arrow[from=3-3, to=4-5]
+		\arrow[from=3-3, to=5-2]
+		\arrow[from=3-3, to=5-4]
+		\arrow[Leftrightarrow, from=3-5, to=3-6]
+	\end{tikzcd}\]
+\end{frame}
 \begin{frame}[fragile]{The Yoneda Embedding}
 	\begin{columns}
 		\column{0.3\textwidth}
@@ -12,22 +76,21 @@
 		\end{tikzcd}\]
 		\column{0.7\textwidth}
 		\begin{itemize}
-			\item Remember that the goal is finding out everything about an object $A$ through its relations to other objects.
-			\pause\item So we want to describe an object through a collection of its homsets.
-			\pause\item Formally, we want a bijective functor
+			\item Formally, we want a bijective functor
 			\begin{align*}
 				\mY : \bC &\to \bS et^\bC\\
 				A &\mapsto \bC(A,-)
 			\end{align*}
 			\vspace{-16pt}\pause\item We call $\mY$ the \textit{Yoneda embedding}.
-			%\pause\item Given $f \in \bC(A,B)$, $\mY(f)$ has to be a morphism between $\bC(A, -)$ and $\bC(B, -)$ in the functor category $\bS et^{\bC}$.
-			%\pause\item Therefore, $\mY(f)$ has to be a natural transformation between $\bC(A, -)$ and $\bC(B, -)$
+			\pause\item Given $f \in \bC(A,B)$, $\mY(f)$ has to be a morphism between $\bC(A, -)$ and $\bC(B, -)$ in the functor category $\bS et^{\bC}$.
+			\pause\item Therefore, $\mY(f)$ has to be a natural transformation between $\bC(A, -)$ and $\bC(B, -)$. 
+			\pause\item Is it actually possible to construct all of the necessary natural transformations?
 		\end{itemize}
 	\end{columns}
 \end{frame}
 \begin{frame}{The Yoneda lemma}
 	\begin{itemize}
-		%\item It turns out we can do even better!
+		\item It turns out we can do even better!
 		\pause\item We can construct the set of all natural transformations between $\bC(A, -)$ and \underline{any} Functor $F :\bC \to \bS et$.
 		\pause\item Specifically, the Yoneda lemma states that:
 		\begin{align*}
@@ -35,8 +98,8 @@
 		\end{align*}
 		\begin{itemize}
 			\vspace{-18pt}\pause\item Furthermore, this isomorphism is a natural transformation.
-			%\pause\item So we can construct the Yoneda embedding $\mY$ from the set $F(A)$.
-			%\pause\item Vice versa, if we know all natural transformations $\text{Nat}(\bC(A,-), F)$, we can construct the set $F(A)$.
+			\pause\item So we can construct the Yoneda embedding $\mY$ from the set $F(A)$.
+			\pause\item Vice versa, if we know all natural transformations $\text{Nat}(\bC(A,-), F)$, we can construct the set $F(A)$.
 		\end{itemize}
 	\end{itemize}
 \end{frame}
