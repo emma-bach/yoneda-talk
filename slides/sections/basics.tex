@@ -28,11 +28,11 @@
 A \textit{category} $\bC$ consists of:
 \begin{itemize}
  \pause\item a collection $|\bC|$ of \textit{objects};
- \pause\item for all $A, B \in |\bC|$, a collection $\bC(A, B)$ of \textit{morphisms} from $A$ to $B$;
+ \pause\item for all $A, B \in |\bC|$, a collection $\bC(A, B)$ of \textit{morphisms} from $A$ to $B$, if this is a set we call it a \textit{homset};
  \pause\item for all $A \in |\bC|$, an \textit{identity morphism} $id_A \in \bC(A, A)$;
  \pause\item for each pair of morphisms $g \in \bC(B,C)$, $f \in \bC(A,B)$, a morphism $g \circ f \in \bC(A,C)$, such that composition is associative.
 \end{itemize}
-\pause\item If $\bC(A, B)$ is a set, we call it the \textit{homset} from $A$ to $B$.
+
 \pause\item For every category $\bC$, the \textit{opposite category} $\bC^{op}$ is a category.
 \pause\item For every pair of categories $\bC$, $\bD$, the \textit{product category} $\bC \times \bD$ is a category.
 \end{itemize}
@@ -58,7 +58,7 @@ A \textit{category} $\bC$ consists of:
 			\pause \item $F(id_A) = id_{F(A)}$
 			\pause \item $F(g \circ f) = F(g) \circ F(f)$
 		\end{itemize}
-		Functors from a category into itself are known as \textit{endofunctors}.
+		\pauseFunctors from a category into itself are known as \textit{endofunctors}.
 \end{columns}
 \end{frame}
 \begin{frame}[fragile]{Natural Transformations}
@@ -86,7 +86,6 @@ A \textit{category} $\bC$ consists of:
 	       \forall f \in \bC(A,B) : \phi_B \circ F(f) = G(f) \circ \phi_A
 	      \end{align*}
 	     \end{itemize}
-	     \pause\item Given two functors $F$ and $G$, we write the collection of all natural transformation between them as $\text{Nat}(F, G)$.
 	    \end{itemize}
 	\end{columns}
 \end{frame}
