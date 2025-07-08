@@ -34,11 +34,10 @@
 data Adapter a b s t = Adapter { from :: s -> a, to :: b -> t }
 	\end{lstlisting}
 	\begin{itemize}
-		\item \texttt{s} and \texttt{t} are assumed to be composite types containing values of types \texttt{a} and \texttt{b} respectively.
-		\pause\item Categorically, this translates to a pair of morphisms $\bHask(S,A) \times \bHask(B,T)$. 
-		\pause\item This pair is a morphism $(\bHask^{op} \times \bHask)((A,B), (S,T))$.
+		\pause\item Categorically, this translates to a pair of morphisms $\bSet(S,A) \times \bSet(B,T)$. 
+		\pause\item This pair is a morphism $(\bSet^{op} \times \bSet)((A,B), (S,T))$.
 		\pause\item We can compose adapters with matching types and define an identity adapter \texttt{Adapter id id}.
-		\pause\item This lets us view the category $\bHask^{op} \times \bHask$ as the category $\bAda$ of adapters.
+		\pause\item This lets us view the category $\bSet^{op} \times \bSet$ as the category $\bAda$ where morphisms are adapters.
 	\end{itemize}
 \end{frame}
 \begin{frame}[fragile]{Profunctors}
@@ -56,27 +55,8 @@ class Profunctor p where
 instance Profunctor (->) where
 	dimap f g h = g . h . f
 		\end{lstlisting}
-		\pause\item We define the category $\bProf$ of Profunctors on Haskell types to be the functor category $\bSet^{(\bHask^{op} \times \bHask)} = \bSet^\bAda$
+		\pause\item We define the category $\bProf$ of Profunctors to be $\bSet^{\bSet^{op} \times \bSet} = \bSet^\bAda$
 	\end{itemize}
-\end{frame}
-\begin{frame}[fragile]{Functor Application as a Functor}
-	\begin{columns}
-		\column{0.3\textwidth}
-		\[\begin{tikzcd}
-			F && G \\
-			\\
-			{F(A)} && {G(A)}
-			\arrow["{\eta}", from=1-1, to=1-3]
-			\arrow["{-(A)}"', dotted, from=1-1, to=3-1]
-			\arrow["{-(A)}", dotted, from=1-3, to=3-3]
-			\arrow["{\eta_A}"', from=3-1, to=3-3]
-		\end{tikzcd}\]
-		\column{0.7\textwidth}
-		\begin{itemize}
-			\item Given a category $\bC$, the operation of applying a functor $F : \bC \to \bSet$ to an object $A \in |\bC|$ is itself a functor from $\bSet^\bC$ to $\bC$.
-			\pause\item We write $-(A)$ for this functor.
-		\end{itemize}
-	\end{columns}
 \end{frame}
 \begin{frame}[fragile]{Profunctor Adapters}
 	\begin{columns}
@@ -99,10 +79,11 @@ type AdapterP a b s t =
 	forall p. Profunctor p -> p a b -> p s t
 			\end{lstlisting}
 			\pause\item As we saw earlier, the polymorphism makes \texttt{AdapterP} a natural transformation.
-			\pause\item We define $\bAdaP$ as the functor category where objects are $|\bAdaP| = |\bAda| = |\bHask^{op} \times \bHask|$, and whose morphisms are profunctor adapters.
+			\pause\item We define $\bAdaP$ as the functor category where objects are $|\bAdaP| = |\bAda| = |\bSet^{op} \times \bSet|$, and whose morphisms are profunctor adapters.
 			\pause\item Specifically, the homsets in $\bAdaP$ are:
 			\begin{align*}
 				\bAdaP ((A,B),(S,T)) &= \bSet^\bProf(-(A, B), -(S, T))\\
+									 &= \bSet^{\bSet^{\bAda}}(-(A, B), -(S, T))\\
 			\end{align*}
 		\end{itemize}
 	\end{columns}
@@ -149,7 +130,7 @@ type AdapterP a b s t =
 \fi
 \begin{frame}{Equivalence of the representations}
 	\begin{align*}
-		\bSet^{\bSet^\bAda}(-(A, B), -(S, T)) \simeq \bAda((A,B), (S,T))
+		\bAdaP ((A,B),(S,T)) = \bSet^{\bSet^\bAda}(-(A, B), -(S, T)) \overset{?}{\simeq} \bAda((A,B), (S,T))
 	\end{align*}
 	\begin{itemize}
 		\pause\item So the proof comes down to showing that a set of natural transformations of natural transformations between the application functors is isomorphic to the underlying set of morphisms.
