@@ -82,8 +82,8 @@ type AdapterP a b s t =
 			\pause\item We define $\bAdaP$ as the functor category where objects are $|\bAdaP| = |\bAda| = |\bSet^{op} \times \bSet|$, and whose morphisms are profunctor adapters.
 			\pause\item Specifically, the homsets in $\bAdaP$ are:
 			\begin{align*}
-				\bAdaP ((A,B),(S,T)) &= \bSet^\bProf(-(A, B), -(S, T))\\
-									 &= \bSet^{\bSet^{\bAda}}(-(A, B), -(S, T))\\
+				\bAdaP ((A,B),(S,T)) &= \bSet^{\bSet^{\bAda}}(-(A, B), -(S, T))\\
+									 &= \nat(-(A, B), -(S, T))\\
 			\end{align*}
 		\end{itemize}
 	\end{columns}
@@ -130,10 +130,9 @@ type AdapterP a b s t =
 \fi
 \begin{frame}{Equivalence of the representations}
 	\begin{align*}
-		\bAdaP ((A,B),(S,T)) = \text{Nat}(-(A, B), -(S, T)) \overset{?}{\simeq} \bAda((A,B), (S,T))
+		\bAdaP ((A,B),(S,T)) = \nat(-(A, B), -(S, T)) \overset{?}{\simeq} \bAda((A,B), (S,T))
 	\end{align*}
 	\begin{itemize}
-		\pause\item So the proof comes down to showing that a set of natural transformations of natural transformations between the application functors is isomorphic to the underlying set of morphisms.
 		\pause\item This involves expanding the functors on the left using the Yoneda lemma and then summarizing everything by applying the Yoneda embedding twice.
 		\pause\item This proof is left as an exercise to the reader :) \pause(a short version of the proof is uploaded alongside the slides on ilias).
 	\end{itemize}

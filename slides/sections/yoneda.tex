@@ -24,12 +24,12 @@
 			\item For any locally small category $\bC$, a homset $\bC(A,B)$ is a set of morphisms.
 			\pause\item We define a functor $\bC(A, -) : \bC \to \mathbb{S}et$:
 			\begin{itemize}
-				\pause\item $\bC(A, -)$ maps an Object $B$ to the Homset $\bC(A,B)$
+				\pause\item $\bC(A, -)$ maps an object $B$ to the homset $\bC(A,B)$
 				\pause\item A morphism $f : \bC(B,C)$ is mapped to the morphism $f \circ : \bC(A,B) \to \bC(A,C)$
 			\end{itemize}
 			\pause\item Similarly, $\bC(-, B)$ is a functor $\bC^{op} \to \mathbb{S}et$:
 			\begin{itemize}
-				\pause\item $\bC(-, B)$ maps an Object $A$ to the Homset $\bC(A,B)$
+				\pause\item $\bC(-, B)$ maps an object $A$ to the homset $\bC(A,B)$
 				\pause\item A morphism $f : \bC(C,A)$ is mapped to the morphism $\circ f: \bC(A,B) \to \bC(C,B)$
 			\end{itemize}
 		\end{itemize}
@@ -114,12 +114,12 @@
 		\pause\item We can construct the set of all natural transformations between $\bC(A, -)$ and \underline{any} Functor $F :\bC \to \bS et$.
 		\pause\item Specifically, the Yoneda lemma states that:
 		\begin{align*}
-			\bSet^\bC(\bC(A,-), F) \simeq F(A)
+			\nat(\bC(A,-), F) \simeq F(A)
 		\end{align*}
 		\begin{itemize}
 			\vspace{-18pt}\pause\item Furthermore, this isomorphism is a natural transformation.
 			\pause\item So we can construct the Yoneda embedding $\mY$ from the set $F(A)$.
-			\pause\item Vice versa, if we know all natural transformations $\bSet^\bC(\bC(A,-), F)$, we can construct the set $F(A)$.
+			\pause\item Vice versa, if we know all natural transformations $\nat(\bC(A,-), F)$, we can construct the set $F(A)$.
 		\end{itemize}
 	\end{itemize}
 \end{frame}

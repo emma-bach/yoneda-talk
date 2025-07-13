@@ -113,11 +113,18 @@
 %
 %
 \begin{definition}
+	The \textit{homfunctor} $\bC(A, -)$ is defined as follows:
+	\begin{itemize}
+		\item An object $B$ is mapped to the homset $\bC(A,B)$.
+		\item A morphism $f : \bC(B,C)$ is mapped to the morphism $f \circ : \bC(A,B) \to \bC(A,C)$.
+	\end{itemize}
+\end{definition}
+\begin{definition}
 	\textbf{Yoneda Lemma:} There exists a natural isomorphism 
 	\[\nat(\bC(A,-), F) \simeq F(A)\]
 \end{definition}
 \begin{definition}
-	\textbf{Yoneda Embedding:} For every object $A \in |\bC|$, there exists a bijective functor \[\bC \to \bC(A,-)\]
+	\textbf{Yoneda Embedding:} For every object $A \in |\bC|$, there exists a bijective functor \[\mY : \bC \to \bC(A,-)\]
 \end{definition}
 \begin{proposition}
 	Any monoid $M = (M, *, e)$ can be represented as a category $\bM$ with a single object $*$, where monoid elements are morphisms, such that composing two morphisms $m$ and $n$ gives the morphism corresponding to the element $m * n$.
