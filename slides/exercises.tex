@@ -1,0 +1,128 @@
+\documentclass{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usepackage[ddmmyyyy]{datetime}
+
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{pdfpages}
+
+\usepackage{titlesec}
+
+
+%hyperref should be last apparently
+\usepackage{hyperref}
+
+% Starts a new paragraph without indentation
+% and with an empty line between paragraphs
+\newcommand*{\newpar}{\par\vspace{\baselineskip}\noindent}
+\newcommand{\ttt}[1]{\texttt{#1}}
+\newcommand{\tbf}[1]{\textbf{#1}}
+\newcommand{\ul}[1]{\underline{#1}}
+\newcommand{\seperator}{\vspace{-8pt}\hrule\vspace{8pt}}
+\newcommand{\id}{\text{id}}
+
+\newcommand{\bAda}{{\mathbb{A}da}}
+\newcommand{\bAdaP}{\mathbb{A}daP}
+\newcommand{\bC}{\mathbb{C}}
+\newcommand{\bD}{\mathbb{D}}
+\newcommand{\bHask}{{\mathbb{H}ask}}
+\newcommand{\bM}{\mathbb{M}}
+\newcommand{\bPre}{\mathbb{P}re}
+\newcommand{\bProf}{{\mathbb{P}rof}}
+\newcommand{\bS}{\mathbb{S}}
+\newcommand{\bSet}{\mathbb{S}et}
+\newcommand{\nat}{\text{Nat}}
+
+\newcommand{\mY}{\mathcal{Y}}
+
+\titleformat{\section}
+  {\normalfont\large\bfseries}{\thesection.}{1em}{}
+
+%\lhead{Emma Bach}
+%\rhead{\today}
+
+%\pagestyle{fancy}
+
+\begin{document}
+% \newtheorem{codename}{printedname}[countedwith]
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}[lemma]{Satz}
+\newtheorem{proposition}[lemma]{Proposition}
+\newtheorem{anmerkung}[lemma]{Anmerkung}
+
+\theoremstyle{definition}
+\newtheorem{definition}[lemma]{Definition}
+\newtheorem{example}[lemma]{Example}
+
+
+\title{\Large\vspace{-1.5cm}\textbf{What you needa know about Yoneda - Exercises}}
+\author{Emma Bach, Seminar on Functional Programming and Logic}
+\date{}
+
+\maketitle
+\begin{definition}
+	A \textit{category} $\bC$ consists of:
+	\begin{itemize}
+		\item a collection $|\bC|$ of \textit{objects};
+		\item for all $A, B \in |\bC|$, a collection $\bC(A, B)$ of \textit{morphisms} from $A$ to $B$;
+		\item for all $A \in |\bC|$, an \textit{identity morphism} $id_A \in \bC(A, A)$;
+		\item for each pair of morphisms $g \in \bC(B,C)$, $f \in \bC(A,B)$, a morphism $g \circ f \in \bC(A,C)$, such that composition is associative.
+	\end{itemize}
+\end{definition}
+\begin{definition}
+	A \textit{functor} $F : \bC \to \bD$ is a structure-preserving map between two categories:
+	\begin{itemize}
+		\item $F$ maps an object $A \in |\bC|$ to an object $F(A) \in |\bD|$
+		\item $F$ maps a morphism $f \in \bC(A,B)$ to a morphism $F(f) \in \bD(F(A),F(B))$
+		\item $F(id_A) = id_{F(A)}$
+		\item $F(g \circ f) = F(g) \circ F(f)$
+	\end{itemize}
+\end{definition}
+\begin{definition}
+	A \textit{natural transformation} is a structure-preserving map between functors:
+	\begin{itemize}
+		\item Let $F,G : \bC \to \bD$ be functors.
+		\item A natural transformation $\phi$ is an \textit{indexed family of morphisms} - for every object $A \in |\bC|$,  $\phi_A$ is a morphism from $F(A)$ to $G(A)$.
+		\item These morphisms satisfy the \textit{naturality condition}:
+		\begin{align*}
+			\forall f \in \bC(A,B) : \phi_B \circ F(f) = G(f) \circ \phi_A
+		\end{align*}
+	\end{itemize}
+\end{definition}
+\section*{Exercise 1}
+\seperator
+\begin{itemize}
+	\item[a)] Let $\leq$ be a reflexive, transitive order (a \textit{preorder}) on a set $M$. Show that if we define objects by $|\bPre(M, \leq)| = M$ and morphisms by $\exists! f_{x \leq y} \in \bPre(x,y) \Leftrightarrow x \leq y$, then $\bPre(M, \leq)$ forms a category.
+	\item[b)] Let $F : \bM \to \bM$ be an endofunctor on $\bM$. Show that $F$ defines a monotonic function $M \to M$, i.e. $\forall x,y : x \leq y \implies F(x) \leq F(y)$.
+	\item[c)] Let $F,G : M \to M$ be monotonic functions. Let $\phi$ be a natural transformation $F \to G$. Show that $\forall x \in M: F(x) \leq G(x)$.
+\end{itemize}
+%
+%
+%
+%
+%
+\clearpage
+%
+%
+%
+%
+%
+\begin{definition}
+	\textbf{Yoneda Lemma:} There exists a natural isomorphism 
+	\[\nat(\bC(A,-), F) \simeq F(A)\]
+\end{definition}
+\begin{definition}
+	\textbf{Yoneda Embedding:} For every object $A \in |\bC|$, there exists a bijective functor \[\bC \to \bC(A,-)\]
+\end{definition}
+\begin{proposition}
+	Any monoid $M = (M, *, e)$ can be represented as a category $\bM$ with a single object $*$, where monoid elements are morphisms, such that composing two morphisms $m$ and $n$ gives the morphism corresponding to the element $m * n$.
+\end{proposition}
+\section*{Exercise 2}
+\seperator
+Use the Yoneda embedding to show that every monoid $M$ is isomorphic to a monoid of functions $M \to M$. 
+\end{document}
