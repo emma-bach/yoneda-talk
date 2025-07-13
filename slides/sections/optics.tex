@@ -130,7 +130,7 @@ type AdapterP a b s t =
 \fi
 \begin{frame}{Equivalence of the representations}
 	\begin{align*}
-		\bAdaP ((A,B),(S,T)) = \bSet^{\bSet^\bAda}(-(A, B), -(S, T)) \overset{?}{\simeq} \bAda((A,B), (S,T))
+		\bAdaP ((A,B),(S,T)) = \text{Nat}(-(A, B), -(S, T)) \overset{?}{\simeq} \bAda((A,B), (S,T))
 	\end{align*}
 	\begin{itemize}
 		\pause\item So the proof comes down to showing that a set of natural transformations of natural transformations between the application functors is isomorphic to the underlying set of morphisms.
