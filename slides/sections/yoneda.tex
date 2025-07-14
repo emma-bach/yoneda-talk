@@ -125,8 +125,8 @@
 \end{frame}
 
 \begin{frame}[fragile]{Constructing the bijection}
-	\begin{columns}
-		\column{0.3\textwidth}
+	%\begin{columns}
+		%\column{0.3\textwidth}
 		\[\begin{tikzcd}
 			A && B \\
 			{\bC(A,A)} && {\bC(A,B)} \\
@@ -138,7 +138,7 @@
 			\arrow["{\phi_B}"{description}, from=2-3, to=4-3]
 			\arrow["{F(f)}", from=4-1, to=4-3]
 		\end{tikzcd}\]
-		
+		\iffalse
 		\column{0.7\textwidth}
 		\begin{itemize}
 			\item Let $\phi \in \text{Nat}(\bC(A,-), F)$. Since $\phi$ is natural transformation, we have
@@ -146,29 +146,35 @@
 			\pause\item Remember that these functors are $\bC \to \bS et$.
 			\pause\item This means our morphisms are just regular set functions.
 		\end{itemize}
-	\end{columns}
+	\fi
+	%\end{columns}
 \end{frame}
 
 \begin{frame}[fragile]{Constructing the bijection}
 	\begin{columns}
-		\column{0.4\textwidth}
+		\column{0.5\textwidth}
 		\[\begin{tikzcd}
 			A && B \\
-			{id_A} && {f} \\
+			{\bC(A,A)} && {\bC(A,B)} \\
 			\\
-			{u \in F(A)} && {\phi_B(f) = F(f)(u)}
+			{F(A)} && {F(B)}
 			\arrow["f", from=1-1, to=1-3]
 			\arrow["{\bC(A,f) = f \circ}", from=2-1, to=2-3]
 			\arrow["{\phi_A}"{description}, from=2-1, to=4-1]
 			\arrow["{\phi_B}"{description}, from=2-3, to=4-3]
 			\arrow["{F(f)}", from=4-1, to=4-3]
 		\end{tikzcd}\]
-		
-		\column{0.6\textwidth}
-		\begin{itemize}
-			\item If we apply these functions to the identity morphism $id_A$, we get:
-			\[\phi_B(f \circ id_A) = F(f)(\phi_A(id_A))\]
-			\[\phi_B(f) = F(f)(\phi_A(id_A)) := F(f)(u)\]
-		\end{itemize}
+		\column{0.5\textwidth}
+		\[\begin{tikzcd}
+			A && B \\
+			{id_A} && {f} \\
+			\\
+			{u} && {\phi_B(f) = F(f)(u)}
+			\arrow["f", from=1-1, to=1-3]
+			\arrow["{\bC(A,f) = f \circ}", from=2-1, to=2-3]
+			\arrow["{\phi_A}"{description}, from=2-1, to=4-1]
+			\arrow["{\phi_B}"{description}, from=2-3, to=4-3]
+			\arrow["{F(f)}", from=4-1, to=4-3]
+		\end{tikzcd}\]
 	\end{columns}
 \end{frame}
