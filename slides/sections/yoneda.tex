@@ -43,26 +43,6 @@
 		\pause\item A morphism $\phi \in \bD^\bC(F, G)$ is a natural transformation $F \to G$.
 	\end{itemize}
 \end{frame}
-\begin{frame}[fragile]{Functor Application as a Functor}
-	\begin{columns}
-		\column{0.3\textwidth}
-		\[\begin{tikzcd}
-			F && G \\
-			\\
-			{F(A)} && {G(A)}
-			\arrow["{\eta}", from=1-1, to=1-3]
-			\arrow["{-(A)}"', dotted, from=1-1, to=3-1]
-			\arrow["{-(A)}", dotted, from=1-3, to=3-3]
-			\arrow["{\eta_A}"', from=3-1, to=3-3]
-		\end{tikzcd}\]
-		\column{0.7\textwidth}
-		\begin{itemize}
-			\item Given a category $\bC$, the operation of applying a functor $F : \bC \to \bSet$ to an object $A \in |\bC|$ is itself a functor from $\bSet^\bC$ to $\bSet$.
-			\pause\item We write $-(A)$ for this functor.
-			\pause\item $-(A) \in \bSet^{\bSet^\bC}$
-		\end{itemize}
-	\end{columns}
-\end{frame}
 \begin{frame}[fragile]{The Yoneda Embedding}
 	% https://q.uiver.app/#q=WzAsMTIsWzIsMiwiQSJdLFswLDEsIkIiXSxbMSwwLCJDIl0sWzMsMCwiRCJdLFs0LDEsIkUiXSxbNCwzLCJGIl0sWzMsNCwiRyJdLFsxLDQsIkgiXSxbMCwzLCJJIl0sWzYsMiwiXFxtYXRoYmJ7Q30oQSwgLSkiXSxbNCwyXSxbNSwyXSxbMCwyXSxbMCwzXSxbMCw0XSxbMCw1XSxbMCw2XSxbMCw3XSxbMCw4XSxbMCwxXSxbMTAsMTEsIiIsMix7ImxldmVsIjoyfV1d
 	\[\begin{tikzcd}
